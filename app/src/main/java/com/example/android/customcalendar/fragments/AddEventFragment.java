@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -144,6 +145,22 @@ public class AddEventFragment extends Fragment {
                         .navigate(R.id.action_addEventFragment_to_mainFragment);
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mEventTitle.requestFocus()) {
+            InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(mEventTitle, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEventTitle.getWindowToken(), 0);
     }
 
     public void createNotification(Long id, String title, String description) {
