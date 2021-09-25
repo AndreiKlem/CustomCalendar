@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--    Date picker dialog appearance-->
+    <style name="date_picker" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:datePickerStyle">@style/my_date_picker</item>
+    </style>
+
+    <style name="my_date_picker" parent="android:Widget.Material.DatePicker">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:datePickerMode">spinner</item>
+        <item name="android:calendarViewShown">false</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <!--    Time picker dialog appearance-->
+    <style name="time_picker" parent="android:Theme.Holo.Light.Dialog" >
+        <item name="android:timePickerStyle">@style/my_time_picker</item>
+    </style>
+
+    <style name="my_time_picker" parent="Widget.MaterialComponents.TimePicker">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:timePickerMode">spinner</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+</resources>

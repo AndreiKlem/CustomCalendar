@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".fragments.AddEventFragment">
+
+    <ImageView
+        android:id="@+id/cancel_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/cancel"
+        android:src="@drawable/ic_cancel"
+        app:layout_constraintBottom_toBottomOf="@id/header_textview"
+        app:layout_constraintEnd_toStartOf="@+id/header_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/header_textview" />
+
+    <TextView
+        android:id="@+id/header_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/add_event"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/save_imageview"
+        app:layout_constraintStart_toEndOf="@+id/cancel_imageview"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="spread" />
+
+    <ImageView
+        android:id="@+id/save_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/save"
+        android:src="@drawable/ic_save"
+        app:layout_constraintBottom_toBottomOf="@id/header_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/header_textview"
+        app:layout_constraintTop_toTopOf="@id/header_textview" />
+
+    <EditText
+        android:id="@+id/event_name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:autofillHints="@string/title"
+        android:hint="@string/title"
+        android:inputType="text|textCapSentences"
+        android:maxLength="28"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_textview" />
+
+    <EditText
+        android:id="@+id/description_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:autofillHints="@string/description"
+        android:hint="@string/description"
+        android:inputType="textMultiLine|textCapSentences"
+        android:maxLength="100"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/event_name_edittext" />
+
+    <TextView
+        android:id="@+id/when_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="@string/when"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description_edittext" />
+
+    <TextView
+        android:id="@+id/date_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/primaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description_edittext" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="@string/reminder"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/when_textview" />
+
+    <TextView
+        android:id="@+id/time_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/remind_at_time"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/primaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date_textview" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
