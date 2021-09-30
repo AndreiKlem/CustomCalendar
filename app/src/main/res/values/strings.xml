@@ -16,4 +16,5 @@
     <string name="when">When</string>
     <string name="reminder">Reminder</string>
     <string name="edit_event">Edit event</string>
+    <string name="alarm_set">Alarm set</string>
 </resources>

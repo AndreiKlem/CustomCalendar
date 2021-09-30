@@ -133,7 +133,10 @@ public class AddEventFragment extends Fragment {
                 LocalDate date = mTodayModel.getToday();
                 Toast.makeText(requireContext(), "Event created", Toast.LENGTH_SHORT).show();
                 mEventModel.insert(new Event(eventTitle, description, date.getYear(),
-                        date.getMonthValue(), date.getDayOfMonth(), mReminderFlag))
+                        date.getMonthValue(), date.getDayOfMonth(),
+                        mTime != null? mTime.getHour() : 0,
+                        mTime != null ? mTime.getMinute() : 0,
+                        mReminderFlag))
                         .subscribeOn(Schedulers.io())
                         .observeOn(Schedulers.io())
                         .subscribe(new DisposableSingleObserver<Long>() {

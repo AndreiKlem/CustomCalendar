@@ -14,6 +14,7 @@ import androidx.transition.TransitionManager;
 import com.example.android.customcalendar.R;
 import com.example.android.customcalendar.database.Event;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +39,13 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
 
     @Override
     public void onBindViewHolder(@NonNull EventListAdapter.EventViewHolder holder, int position) {
-        String title = mEventList.get(position).getEvent();
-        String description = mEventList.get(position).getDescription();
-        holder.mEventTitle.setText(title);
-        holder.mDescription.setText(description);
+        Event event = mEventList.get(position);
+        holder.mEventTitle.setText(event.getEvent());
+        holder.mDescription.setText(event.getDescription());
+        if (event.isReminder()) {
+            holder.mAlarmImage.setVisibility(View.VISIBLE);
+            holder.mAlarmTime.setText(LocalTime.of(event.getHour(), event.getMinutes()).toString());
+        }
     }
 
     @Override
@@ -74,12 +78,16 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
         public View mItemView;
         public TextView mDescription;
         public ImageView mEditImage;
+        public ImageView mAlarmImage;
+        public TextView mAlarmTime;
 
         public EventViewHolder(View itemView) {
             super(itemView);
             mEventTitle = itemView.findViewById(R.id.title_textview);
             mDescription = itemView.findViewById(R.id.description_textview);
             mEditImage = itemView.findViewById(R.id.edit_event_imageview);
+            mAlarmImage = itemView.findViewById(R.id.alarm_image_view);
+            mAlarmTime = itemView.findViewById(R.id.alarm_time_textview);
             this.mItemView = itemView;
             itemView.setOnClickListener(this);
             mEditImage.setOnClickListener(this);

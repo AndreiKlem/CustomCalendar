@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/andre/AndroidStudioProjects/CustomCalendar/app/src/main/res/drawable/ic_edit.xml" value="0.15555555555555556" />
-        <entry key="..\:/Users/andre/AndroidStudioProjects/CustomCalendar/app/src/main/res/layout/eventlist_item.xml" value="0.7333333333333334" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/CustomCalendar/app/src/main/res/drawable/ic_notification.xml" value="0.7" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/CustomCalendar/app/src/main/res/layout/eventlist_item.xml" value="0.16719846841097638" />
         <entry key="..\:/Users/andre/AndroidStudioProjects/CustomCalendar/app/src/main/res/layout/fragment_add_event.xml" value="0.142692750287687" />
       </map>
     </option>

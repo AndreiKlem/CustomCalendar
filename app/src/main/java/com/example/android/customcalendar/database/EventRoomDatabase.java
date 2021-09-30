@@ -8,8 +8,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +54,7 @@ public abstract class EventRoomDatabase extends RoomDatabase {
                     for(int i = 1; i < 30; i++) {
                         date = date.withDayOfMonth((int) ((Math.random() * (date.lengthOfMonth() - 1)) + 1));
                         events.add(new Event("Event " + i, "Description " + i,
-                                date.getYear(), date.getMonthValue(), date.getDayOfMonth(), false));
+                                date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 12, 0, false));
                     }
                     dao.insertAll(events);
                 }

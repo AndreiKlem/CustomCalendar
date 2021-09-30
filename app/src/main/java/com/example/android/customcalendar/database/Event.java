@@ -27,15 +27,24 @@ public class Event {
     @ColumnInfo(name = "day")
     private final int mDay;
 
+    @ColumnInfo(name = "hour")
+    private final int mHour;
+
+    @ColumnInfo(name = "minutes")
+    private final int mMinutes;
+
     @ColumnInfo(name = "reminder")
     private final boolean mReminder;
 
-    public Event(@NonNull String event, String description, int year, int month, int day, boolean reminder) {
+    public Event(@NonNull String event, String description, int year, int month, int day, int mHour,
+                 int mMinutes, boolean reminder) {
         this.mEvent = event;
         this.mDescription = description;
         this.mYear = year;
         this.mMonth = month;
         this.mDay = day;
+        this.mHour = mHour;
+        this.mMinutes = mMinutes;
         this.mReminder = reminder;
     }
 
@@ -52,6 +61,10 @@ public class Event {
     public int getMonth() {return this.mMonth;}
 
     public int getDay() {return this.mDay;}
+
+    public int getHour() {return this.mHour;}
+
+    public int getMinutes() {return this.mMinutes;}
 
     public boolean isReminder() {return this.mReminder;}
 
