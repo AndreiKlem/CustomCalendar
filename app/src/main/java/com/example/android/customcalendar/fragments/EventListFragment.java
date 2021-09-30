@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,12 +36,14 @@ import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class EventListFragment extends Fragment {
+public class EventListFragment extends Fragment implements EventListAdapter.OnEditClickListener {
 
     private DisposableSingleObserver<List<Event>> mDisposable;
     private DisposableCompletableObserver mDisposableCompletable;
     private final String TAG = "Events Fragment";
     private EventListAdapter mAdapter;
+    private View mView;
+    private EventViewModel mEventModel;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -50,21 +53,21 @@ public class EventListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_event_list, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        this.mView = view;
         RecyclerView eventRecyclerView = view.findViewById(R.id.event_recyclerview);
 
-        mAdapter = new EventListAdapter();
+        mAdapter = new EventListAdapter(this, eventRecyclerView);
         eventRecyclerView.setAdapter(mAdapter);
         eventRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        EventViewModel eventModel = new ViewModelProvider(requireActivity()).get(EventViewModel.class);
+        mEventModel = new ViewModelProvider(requireActivity()).get(EventViewModel.class);
         TodayViewModel todayModel = new ViewModelProvider(requireActivity()).get(TodayViewModel.class);
-        eventModel.getEventsDay().observe(getViewLifecycleOwner(), day -> eventModel
+        mEventModel.getEventsDay().observe(getViewLifecycleOwner(), day -> mEventModel
                 .getSelectedDayEvents(todayModel.getToday())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -91,36 +94,20 @@ public class EventListFragment extends Fragment {
                 int position = viewHolder.getAdapterPosition();
                 Event event = mAdapter.getEventAt(position);
                 mAdapter.deleteEventAt(position);
-                if (event.isReminder()) {
-                    cancelAlarm(event.getId());
-                    Log.i(TAG, "onSwiped: Cancelling reminder...");
-                }
-                eventModel.deleteEvent(event)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(mDisposableCompletable = new DisposableCompletableObserver() {
-                            @Override
-                            public void onComplete() {
-                                if (mAdapter.getItemCount() == 0) {
-                                    eventModel.removeDotAt(event.getDay());
-                                }
-                                Toast.makeText(requireContext(), "Event deleted", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onError(@NotNull Throwable e) {
-                                Log.e(TAG, "onError: " + e.getMessage());
-                            }
-                        });
+                cancelAlarm(event);
+                deleteEventFromDatabase(event);
             }
         }).attachToRecyclerView(eventRecyclerView);
     }
 
-    public void cancelAlarm(Long id) {
-        AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent().setClass(requireContext(), AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), id.intValue(), intent, 0);
-        alarmManager.cancel(pendingIntent);
+    public void cancelAlarm(Event event) {
+        if (event.isReminder()) {
+            int id = (int) event.getId();
+            AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent().setClass(requireContext(), AlarmReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), id, intent, 0);
+            alarmManager.cancel(pendingIntent);
+        }
     }
 
     @Override
@@ -130,5 +117,34 @@ public class EventListFragment extends Fragment {
         if (mDisposableCompletable != null) {
             mDisposableCompletable.dispose();
         }
+    }
+
+    @Override
+    public void onEditClick(Event event, int position) {
+        cancelAlarm(event);
+        Bundle bundle = new Bundle();
+        bundle.putString(MainFragment.HEADER_EXTRA, getString(R.string.edit_event));
+        mEventModel.setEvent(event);
+        deleteEventFromDatabase(event);
+        Navigation.findNavController(mView).navigate(R.id.action_mainFragment_to_addEventFragment, bundle);
+    }
+    
+    public void deleteEventFromDatabase(Event event) {
+        mEventModel.deleteEvent(event)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mDisposableCompletable = new DisposableCompletableObserver() {
+                    @Override
+                    public void onComplete() {
+                        if (mAdapter.getItemCount() == 0) {
+                            mEventModel.removeDotAt(event.getDay());
+                        }
+                        Toast.makeText(requireContext(), "Event deleted", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage());
+                    }
+                });
     }
 }

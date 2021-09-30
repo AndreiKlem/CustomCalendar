@@ -16,7 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainFragment extends Fragment {
 
-    private FloatingActionButton fab;
+    public static final String HEADER_EXTRA = "addEventFragmentHeader";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,11 +35,15 @@ public class MainFragment extends Fragment {
         transaction.setReorderingAllowed(true);
         transaction.commit();
 
-        fab = view.findViewById(R.id.add_event_fab);
+        FloatingActionButton fab = view.findViewById(R.id.add_event_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_addEventFragment);
+                Bundle bundle = new Bundle();
+                bundle.putString(HEADER_EXTRA, getString(R.string.add_event));
+                Navigation.findNavController(view).navigate(
+                        R.id.action_mainFragment_to_addEventFragment,
+                        bundle);
             }
         });
     }

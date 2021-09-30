@@ -3,18 +3,15 @@ package com.example.android.customcalendar.viewmodels;
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.android.customcalendar.EventRepository;
 import com.example.android.customcalendar.database.Event;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public class EventViewModel extends AndroidViewModel {
@@ -22,6 +19,7 @@ public class EventViewModel extends AndroidViewModel {
     private EventRepository mRepository;
     private MutableLiveData<LocalDate> mEventsDay = new MutableLiveData<>();
     private MutableLiveData<Integer> mRemovePosition = new MutableLiveData<>();
+    private Event mEvent;
 
     public EventViewModel(Application application) {
         super(application);
@@ -50,4 +48,8 @@ public class EventViewModel extends AndroidViewModel {
     public MutableLiveData<Integer> getDotRemovePosition() { return mRemovePosition; }
 
     public void removeDotAt(int i) { mRemovePosition.setValue(i);}
+
+    public void setEvent(Event event) { mEvent = event; }
+
+    public Event getEvent() { return mEvent; }
 }

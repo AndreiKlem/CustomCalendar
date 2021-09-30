@@ -34,5 +34,15 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#808282" />
 
+        <ImageView
+            android:id="@+id/edit_event_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_below="@+id/description_textview"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/add_event"
+            android:src="@drawable/ic_edit" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

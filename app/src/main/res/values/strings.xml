@@ -15,4 +15,5 @@
     <string name="remind_at_time">Do not remind</string>
     <string name="when">When</string>
     <string name="reminder">Reminder</string>
+    <string name="edit_event">Edit event</string>
 </resources>

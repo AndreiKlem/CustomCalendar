@@ -73,11 +73,19 @@ public class AddEventFragment extends Fragment {
         mDescriptionText = view.findViewById(R.id.description_edittext);
         mDateTextView = view.findViewById(R.id.date_textview);
         mTimeTextView = view.findViewById(R.id.time_textview);
+        TextView headerTextView = view.findViewById(R.id.header_textview);
+        String header = getArguments().getString(MainFragment.HEADER_EXTRA);
+        headerTextView.setText(header);
 
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 
         mEventTitle.requestFocus();
 
+        if (header.equals(getResources().getString(R.string.edit_event))) {
+            Event event = mEventModel.getEvent();
+            mEventTitle.setText(event.getEvent());
+            mDescriptionText.setText(event.getDescription());
+        }
         mDateTextView.setText(mTodayModel.getDateText());
         mDateTextView.setOnClickListener(v -> {
             DialogFragment datePicker = new DatePickerFragment();
