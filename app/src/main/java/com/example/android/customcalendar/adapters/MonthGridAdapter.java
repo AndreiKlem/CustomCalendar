@@ -16,7 +16,6 @@ import com.example.android.customcalendar.R;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class MonthGridAdapter extends BaseAdapter {
 
@@ -24,7 +23,7 @@ public class MonthGridAdapter extends BaseAdapter {
     private final Context mContext;
     private final int mCurrentMonth;
     private final int mOffsetColor;
-    private HashSet<Integer> mDots = new HashSet<>();
+    private final HashSet<Integer> mDots = new HashSet<>();
     private int mCursorPosition;
 
     public MonthGridAdapter(Context context, ArrayList<Day> days, int currentMonth) {
@@ -32,7 +31,7 @@ public class MonthGridAdapter extends BaseAdapter {
         this.mContext = context;
         this.mDays = days;
         this.mCurrentMonth = currentMonth;
-        this.mOffsetColor = ContextCompat.getColor(context, R.color.color_offset);
+        this.mOffsetColor = ContextCompat.getColor(context, R.color.offset);
     }
 
     @Override

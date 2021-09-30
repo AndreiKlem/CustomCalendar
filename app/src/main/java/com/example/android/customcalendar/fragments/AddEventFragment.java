@@ -85,6 +85,7 @@ public class AddEventFragment extends Fragment {
             Event event = mEventModel.getEvent();
             mEventTitle.setText(event.getEvent());
             mDescriptionText.setText(event.getDescription());
+            cancelImageView.setImageResource(R.drawable.ic_delete);
         }
         mDateTextView.setText(mTodayModel.getDateText());
         mDateTextView.setOnClickListener(v -> {
@@ -128,10 +129,13 @@ public class AddEventFragment extends Fragment {
             String description = mDescriptionText.getText().toString().trim();
             if (eventTitle.trim().isEmpty()) {
                 mEventTitle.getText().clear();
-                Toast.makeText(requireContext(), "Please insert a title", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.title_insert_request, Toast.LENGTH_SHORT).show();
             } else {
                 LocalDate date = mTodayModel.getToday();
-                Toast.makeText(requireContext(), "Event created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(),
+                        header.equals(getResources().getString(R.string.add_event)) ?
+                                R.string.event_created : R.string.event_edited,
+                        Toast.LENGTH_SHORT).show();
                 mEventModel.insert(new Event(eventTitle, description, date.getYear(),
                         date.getMonthValue(), date.getDayOfMonth(),
                         mTime != null? mTime.getHour() : 0,

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">4Fish</string>
+    <string name="title">Название</string>
+    <string name="description">Описание</string>
+    <string name="dot">Маркер</string>
+    <string name="back">Назад</string>
+    <string name="forward">Вперед</string>
+    <string name="add_event">Создать событие</string>
+    <string name="cancel">Отменить</string>
+    <string name="save">Сохранить</string>
+    <string name="channel_name">Event reminders</string>
+    <string name="channel_description">4Fish calendar</string>
+    <string name="remind_at_time">Не напоминать</string>
+    <string name="when">Когда</string>
+    <string name="reminder">Напоминание</string>
+    <string name="edit_event">Изменить</string>
+    <string name="alarm_set">Напоминание задано</string>
+    <string name="event_created">Событие создано</string>
+    <string name="title_insert_request">Пожалуйста введите название</string>
+    <string name="event_deleted">Событие удалено</string>
+    <string name="event_edited">Событие изменено</string>
+</resources>

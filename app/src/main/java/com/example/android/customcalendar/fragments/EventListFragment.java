@@ -139,7 +139,7 @@ public class EventListFragment extends Fragment implements EventListAdapter.OnEd
                         if (mAdapter.getItemCount() == 0) {
                             mEventModel.removeDotAt(event.getDay());
                         }
-                        Toast.makeText(requireContext(), "Event deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), R.string.event_deleted, Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onError(@NotNull Throwable e) {

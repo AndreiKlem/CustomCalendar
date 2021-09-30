@@ -1,14 +1,12 @@
 <resources>
     <string name="app_name">4Fish</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title">Title</string>
-    <string name="save_event">Save event</string>
     <string name="description">Description</string>
     <string name="dot">dot</string>
     <string name="back">back</string>
     <string name="forward">forward</string>
     <string name="add_event">Add event</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="save">save</string>
     <string name="channel_name">Event reminders</string>
     <string name="channel_description">4Fish calendar</string>
@@ -17,4 +15,8 @@
     <string name="reminder">Reminder</string>
     <string name="edit_event">Edit event</string>
     <string name="alarm_set">Alarm set</string>
+    <string name="event_created">Event created</string>
+    <string name="title_insert_request">Please insert a title</string>
+    <string name="event_deleted">Event deleted</string>
+    <string name="event_edited">Event edited</string>
 </resources>
