@@ -95,9 +95,8 @@ public class MonthFragment extends Fragment {
             }
         });
 
-        mEventModel.getDotRemovePosition().observe(getViewLifecycleOwner(), day -> {
-            mAdapter.removeDot(day + mOffsetBefore - 1);
-        });
+        mEventModel.getDotRemovePosition().observe(getViewLifecycleOwner(), day ->
+                mAdapter.removeDot(day + mOffsetBefore - 1));
     }
 
     private void setMonthDots() {
@@ -130,7 +129,7 @@ public class MonthFragment extends Fragment {
         if (getParentFragment() instanceof OnSwipeRequestListener) {
             onSwipeRequestListener = (OnSwipeRequestListener) getParentFragment();
         } else {
-            throw new RuntimeException(getParentFragment().toString()
+            throw new RuntimeException(requireParentFragment().toString()
                     + " must implement OnSwipeRequestListener interface");
         }
     }

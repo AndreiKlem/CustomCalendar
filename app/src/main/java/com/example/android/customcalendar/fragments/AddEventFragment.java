@@ -40,7 +40,6 @@ import java.time.ZonedDateTime;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
-//@RequiresApi(api = Build.VERSION_CODES.P)
 public class AddEventFragment extends Fragment {
 
     private static final String DATE_REQUEST_CODE = "requestDate";

@@ -9,8 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
-
 import com.example.android.customcalendar.Day;
 import com.example.android.customcalendar.R;
 

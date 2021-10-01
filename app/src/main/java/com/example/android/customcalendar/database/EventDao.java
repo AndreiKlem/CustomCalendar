@@ -1,21 +1,14 @@
 package com.example.android.customcalendar.database;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.android.customcalendar.Day;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.Future;
 
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 @Dao
@@ -33,7 +26,8 @@ public interface EventDao {
     @Query("DELETE FROM event_table")
     void delete_all();
 
-    @Query("SELECT * FROM event_table WHERE year IS :year AND month IS :month AND day IS :day")
+    @Query("SELECT * FROM event_table WHERE year IS :year AND month IS :month AND day IS :day" +
+            " ORDER BY reminder DESC, hour, minutes ASC, event ASC")
     Single<List<Event>> getSelectedDayEvents(int year, int month, int day);
 
     @Query("SELECT day FROM event_table WHERE year IS :year AND month IS :month")

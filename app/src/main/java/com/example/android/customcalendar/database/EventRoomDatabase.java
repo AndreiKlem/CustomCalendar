@@ -34,7 +34,6 @@ public abstract class EventRoomDatabase extends RoomDatabase {
                 }
             }
         }
-
         return INSTANCE;
     }
 
@@ -43,7 +42,6 @@ public abstract class EventRoomDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-
             databaseWriteExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -54,7 +52,7 @@ public abstract class EventRoomDatabase extends RoomDatabase {
                     for(int i = 1; i < 30; i++) {
                         date = date.withDayOfMonth((int) ((Math.random() * (date.lengthOfMonth() - 1)) + 1));
                         events.add(new Event("Event " + i, "Description " + i,
-                                date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 12, 0, false));
+                                date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 0, 0, false));
                     }
                     dao.insertAll(events);
                 }
