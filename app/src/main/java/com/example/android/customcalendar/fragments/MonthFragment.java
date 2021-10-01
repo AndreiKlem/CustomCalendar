@@ -36,8 +36,7 @@ public class MonthFragment extends Fragment {
     private static final String TAG = "MonthFragment";
     private int mOffsetBefore;
     private MonthGridAdapter mAdapter;
-    private GridView grid;
-    private ArrayList<Day> mDays = new ArrayList<>();
+    private final ArrayList<Day> mDays = new ArrayList<>();
     private TodayViewModel mTodayModel;
     private EventViewModel mEventModel;
     private OnSwipeRequestListener onSwipeRequestListener;
@@ -53,8 +52,7 @@ public class MonthFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        grid = view.findViewById(R.id.month_grid);
-//        Drawable mCircle = ContextCompat.getDrawable(requireContext(), R.drawable.cursor);
+        GridView grid = view.findViewById(R.id.month_grid);
 
         // Receiving date from page adapter
         Bundle args = getArguments();
@@ -76,11 +74,11 @@ public class MonthFragment extends Fragment {
 
         // Preparing days to fill the grid.
         for (int i = 0; i < cellsAmount; i++) {
-            mDays.add(i, new Day(slider.getMonthValue(), slider.getDayOfMonth(), false));
+            mDays.add(i, new Day(slider.getYear(), slider.getMonthValue(), slider.getDayOfMonth()));
             slider = slider.plusDays(1);
         }
 
-        mAdapter = new MonthGridAdapter(getContext(), mDays, mCurrentMonth.getMonthValue());
+        mAdapter = new MonthGridAdapter(requireContext(), mDays, mCurrentMonth.getYear(), mCurrentMonth.getMonthValue());
         grid.setAdapter(mAdapter);
         setMonthDots();
 

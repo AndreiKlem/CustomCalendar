@@ -1,6 +1,7 @@
 package com.example.android.customcalendar.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import com.example.android.customcalendar.Day;
 import com.example.android.customcalendar.R;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,17 +23,22 @@ public class MonthGridAdapter extends BaseAdapter {
 
     private final ArrayList<Day> mDays;
     private final Context mContext;
+    private final int mCurrentYear;
     private final int mCurrentMonth;
     private final int mOffsetColor;
     private final HashSet<Integer> mDots = new HashSet<>();
     private int mCursorPosition;
+    private final LocalDate today = LocalDate.now();
+    private final int mTodayColor;
 
-    public MonthGridAdapter(Context context, ArrayList<Day> days, int currentMonth) {
+    public MonthGridAdapter(Context context, ArrayList<Day> days, int currentYear, int currentMonth) {
         super();
         this.mContext = context;
         this.mDays = days;
         this.mCurrentMonth = currentMonth;
-        this.mOffsetColor = ContextCompat.getColor(context, R.color.offset);
+        this.mCurrentYear = currentYear;
+        this.mOffsetColor = context.getColor(R.color.offset);
+        this.mTodayColor = context.getColor(R.color.primaryDarkColor);
     }
 
     @Override
@@ -71,20 +78,22 @@ public class MonthGridAdapter extends BaseAdapter {
         convertView.setBackground(null);
 
         // Gray out other months days
-        if(mDays.get(position).getMonth() != mCurrentMonth) {
+        if (mDays.get(position).getMonth() != mCurrentMonth) {
             viewHolder.textView.setTextColor(mOffsetColor);
+        } else if (mCurrentYear == today.getYear() && mCurrentMonth == today.getMonthValue()
+                && mDays.get(position).getDayOfMonth() == today.getDayOfMonth()) {
+            viewHolder.textView.setTextColor(mTodayColor);
+            viewHolder.textView.setTypeface(Typeface.DEFAULT_BOLD);
         }
 
         // Draw the cursor
-        if(mCursorPosition == position) {
+        if (mCursorPosition == position) {
             convertView.setBackgroundResource(R.drawable.cursor);
         }
 
         // Set events dots for the month
-        if(mDots != null) {
-            if(mDots.contains(position)) {
-                viewHolder.imageView.setVisibility(View.VISIBLE);
-            }
+        if (mDots.contains(position)) {
+            viewHolder.imageView.setVisibility(View.VISIBLE);
         }
         return convertView;
     }
