@@ -95,7 +95,7 @@ public class EventListFragment extends Fragment implements EventListAdapter.OnEd
                 Event event = mAdapter.getEventAt(position);
                 mAdapter.deleteEventAt(position);
                 cancelAlarm(event);
-                deleteEventFromDatabase(event);
+                deleteEventFromDatabase(event, true);
             }
         }).attachToRecyclerView(eventRecyclerView);
     }
@@ -125,11 +125,11 @@ public class EventListFragment extends Fragment implements EventListAdapter.OnEd
         Bundle bundle = new Bundle();
         bundle.putString(MainFragment.HEADER_EXTRA, getString(R.string.edit_event));
         mEventModel.setEvent(event);
-        deleteEventFromDatabase(event);
+        deleteEventFromDatabase(event, false);
         Navigation.findNavController(mView).navigate(R.id.action_mainFragment_to_addEventFragment, bundle);
     }
-    
-    public void deleteEventFromDatabase(Event event) {
+
+    public void deleteEventFromDatabase(Event event, Boolean showToast) {
         mEventModel.deleteEvent(event)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -139,8 +139,11 @@ public class EventListFragment extends Fragment implements EventListAdapter.OnEd
                         if (mAdapter.getItemCount() == 0) {
                             mEventModel.removeDotAt(event.getDay());
                         }
-                        Toast.makeText(requireContext(), R.string.event_deleted, Toast.LENGTH_SHORT).show();
+                        if (showToast) {
+                            Toast.makeText(requireContext(), R.string.event_deleted, Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                     @Override
                     public void onError(@NotNull Throwable e) {
                         Log.e(TAG, "onError: " + e.getMessage());

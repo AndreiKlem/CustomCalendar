@@ -120,8 +120,10 @@ public class AddEventFragment extends Fragment {
             timePicker.show(fragmentManager, "timePicker");
         });
 
-        cancelImageView.setOnClickListener(v -> Navigation.findNavController(view)
-                .navigate(R.id.action_addEventFragment_to_mainFragment));
+        cancelImageView.setOnClickListener(v -> {
+            Toast.makeText(requireContext(), R.string.event_deleted, Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(view).navigate(R.id.action_addEventFragment_to_mainFragment);
+        });
 
         saveImageView.setOnClickListener(v -> {
             String eventTitle = mEventTitle.getText().toString();
@@ -137,7 +139,7 @@ public class AddEventFragment extends Fragment {
                         Toast.LENGTH_SHORT).show();
                 mEventModel.insert(new Event(eventTitle, description, date.getYear(),
                         date.getMonthValue(), date.getDayOfMonth(),
-                        mTime != null? mTime.getHour() : 0,
+                        mTime != null ? mTime.getHour() : 0,
                         mTime != null ? mTime.getMinute() : 0,
                         mReminderFlag))
                         .subscribeOn(Schedulers.io())
