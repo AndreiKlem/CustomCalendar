@@ -73,7 +73,7 @@ public class AddEventFragment extends Fragment {
         mDateTextView = view.findViewById(R.id.date_textview);
         mTimeTextView = view.findViewById(R.id.time_textview);
         TextView headerTextView = view.findViewById(R.id.header_textview);
-        String header = getArguments().getString(MainFragment.HEADER_EXTRA);
+        String header = requireArguments().getString(MainFragment.HEADER_EXTRA);
         headerTextView.setText(header);
 
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
@@ -85,6 +85,11 @@ public class AddEventFragment extends Fragment {
             mEventTitle.setText(event.getEvent());
             mDescriptionText.setText(event.getDescription());
             cancelImageView.setImageResource(R.drawable.ic_delete);
+            if (event.isReminder()) {
+                mTime = LocalTime.of(event.getHour(), event.getMinutes());
+                mTimeTextView.setText(mTime.toString());
+                mReminderFlag = true;
+            }
         }
         mDateTextView.setText(mTodayModel.getDateText());
         mDateTextView.setOnClickListener(v -> {
@@ -151,7 +156,6 @@ public class AddEventFragment extends Fragment {
                                     createNotification(id, eventTitle, description);
                                 }
                             }
-
                             @Override
                             public void onError(@NotNull Throwable e) {
                                 Log.e(TAG, "onError: " + e.getMessage());
