@@ -36,7 +36,7 @@ public class MonthGridAdapter extends BaseAdapter {
         this.mCurrentMonth = currentMonth;
         this.mCurrentYear = currentYear;
         this.mOffsetColor = context.getColor(R.color.offset);
-        this.mTodayColor = context.getColor(R.color.primaryDarkColor);
+        this.mTodayColor = context.getColor(R.color.secondaryColor);
     }
 
     @Override
