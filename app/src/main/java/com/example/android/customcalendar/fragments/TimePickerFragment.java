@@ -1,11 +1,9 @@
 package com.example.android.customcalendar.fragments;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
@@ -15,8 +13,6 @@ import androidx.fragment.app.DialogFragment;
 import com.example.android.customcalendar.R;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.time.LocalTime;
 
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
     @NonNull

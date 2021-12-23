@@ -28,7 +28,6 @@ public class CalendarFragment extends Fragment implements OnSwipeRequestListener
     // How many pages
     private static final int PAGES_AMOUNT = 100;
 
-    private static final String TAG = "Calendar fragment";
     private ViewPager2 mPager;
     private MonthPagerAdapter mMonthPagerAdapter;
     private int mCurrentPosition;

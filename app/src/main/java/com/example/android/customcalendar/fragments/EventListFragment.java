@@ -105,7 +105,10 @@ public class EventListFragment extends Fragment implements EventListAdapter.OnEd
             int id = (int) event.getId();
             AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent().setClass(requireContext(), AlarmReceiver.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), id, intent, 0);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(),
+                    id,
+                    intent,
+                    PendingIntent.FLAG_IMMUTABLE);
             alarmManager.cancel(pendingIntent);
         }
     }

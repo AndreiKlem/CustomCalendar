@@ -1,16 +1,9 @@
 package com.example.android.customcalendar;
 
 import android.app.Application;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.media.AudioAttributes;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
-
-import java.net.URI;
 
 public class CalendarNotification extends Application {
 

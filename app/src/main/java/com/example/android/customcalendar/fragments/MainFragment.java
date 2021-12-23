@@ -36,15 +36,12 @@ public class MainFragment extends Fragment {
         transaction.commit();
 
         FloatingActionButton fab = view.findViewById(R.id.add_event_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString(HEADER_EXTRA, getString(R.string.add_event));
-                Navigation.findNavController(view).navigate(
-                        R.id.action_mainFragment_to_addEventFragment,
-                        bundle);
-            }
+        fab.setOnClickListener(view1 -> {
+            Bundle bundle = new Bundle();
+            bundle.putString(HEADER_EXTRA, getString(R.string.add_event));
+            Navigation.findNavController(view1).navigate(
+                    R.id.action_mainFragment_to_addEventFragment,
+                    bundle);
         });
     }
 }

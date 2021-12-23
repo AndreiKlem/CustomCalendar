@@ -189,7 +189,10 @@ public class AddEventFragment extends Fragment {
         intent.putExtra("title", title);
         intent.putExtra("description", description);
         intent.putExtra("id", id);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), id.intValue(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(),
+                id.intValue(),
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, getZonedDateTime().toInstant().toEpochMilli(), pendingIntent);
     }
 

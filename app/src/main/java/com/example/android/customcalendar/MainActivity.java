@@ -3,7 +3,6 @@ package com.example.android.customcalendar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.inputmethod.InputMethodManager;
 
 
 public class MainActivity extends AppCompatActivity {
